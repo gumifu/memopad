@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Shopemo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sample.css">
+</head>
+
+<body>
+  <!-- <header style="display:none;"> -->
+  <header>
+    <h1>Shopemo</h1>
+  </header>
+  <!-- <main style="display: none;"> -->
+  <main>
+    <div id="inputs">
+      <div id="memos">
+        <input type="text" id="input_1" placeholder="店名:クランク">
+        <!-- 押すと縮小 -->
+        <div>
+          <div class="timers">
+            <i id="time">0秒</i>
+            <input type="text" id="sec" class="timer" placeholder="目安：180秒">
+            <button id="start">開始</button>
+            <audio src="sound/Accent45-2.mp3" id="sound"></audio>
+          </div>
+          <!-- タイマー -->
+
+          <input type="date" id="input">
+          <div class="comp">
+            <i>評価</i>
+            <input type="range" id="input_2" min="0" max="100" step="10">
+          </div>
+          <textarea id="text_area" placeholder="お店情報"></textarea>
+          <textarea id="text_area1" placeholder="tweetメモ:◯ ◯ ◯"></textarea>
+          <div id="tweet"></div>
+          <ul>
+            <li id="save">Save</li>
+            <li id="clear">✖️</li>
+            <li id="add_memo">+</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const time = document.querySelector('#time');
+    const sec = document.querySelector('#sec');
+    const start = document.querySelector('#start');
+    const sound = document.querySelector('#sound');
+    let count = 0;
+    const s = 1000;
+
+    start.onclick = function () {
+      const set_id = setInterval(function () {
+        count++;
+        time.innerHTML = count;
+        if (count == sec.value) {
+          sound.play();
+          clearInterval(set_id);
+        }
+      }, s);//1000=1
+    }
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    // $('header').fadeIn(1000);
+    // $('main').fadeIn(1000);
+    // $('#input_1').on('click', function () {
+    //   $(this).next().slideToggle();
+    // });
+
+    $('#save').on('click', function () {
+
+      const data = {
+        date: $('#input').val(),
+        title: $('#input_1').val(),
+        range: $('#input_2').val(),
+        text: $('#text_area').val(),
+        text1: $('#text_area1').val(),
+        tweet1: $('#tweet').val(),
+      }
+      console.log('data');
+      const jsonData = JSON.stringify(data);
+      //ローカルストレージの'memo'に取得した内容を保存
+      localStorage.setItem('memo', jsonData);
+
+      //const text = $('#text_area').val();
+      $('#tweet').html('<a href="' + text + '">' + text + '</a>');
+       localStorage.setItem('memo', text)
+      alert('セーブされました');
+    });
+
+    //削除
+    $('#clear').on('click', function () {
+      const res = confirm("削除しても良いですか？");
+      if (res == true) {
+        // OKなら移動
+        //ローカルストレージのmemoを削除
+        localStorage.removeItem('memo');
+        //テキストを空文字で上書き
+        $('#input').val(''),
+          $('#input_1').val(''),
+          $('#input_2').val(''),
+          $('#text_area').val('');
+        $('#text_area1').val('');
+        $('#tweet').val('');
+        alert('削除されました');
+      }
+      else {
+        // キャンセルならアラートボックスを表示
+        alert("やめまーす。");
+      }
+      
+    });
+
+
+    //ローカルストレージのチェック
+    if (localStorage.getItem('memo')) {
+      //memoを取得
+      const jsonData = localStorage.getItem('memo');
+      const data = JSON.parse(jsonData);
+      $('#input').val(data.date);
+      $('#input_1').val(data.title);
+      $('#input_2').val(data.range);
+      $('#text_area').val(data.text);
+      $('#text_area1').val(data.text1);
+      $('#tweet').val(data.tweet1);
+      //テキストエリアに'memo'を呼び出し上書きする
+    }
+
+    // const tweets = [];
+
+    // $('#btn').on('click', function () {
+    //   const tweet = $('#text_area1').val();
+    //   tweets.push(tweet);
+    //   console.log(tweets);
+
+    //   const tweetTag = [];
+    //   for (let i = 0; i < tweets.length; i++) {
+    //     tweetTag.push(tweets[i])
+    //     console.log(tweetTag);
+    //   }
+    //   $('#js-autolink').html(tweetTag.reverse());
+    //   $('#')
+
+    // });
+
+  </script>
+
+</body>
+
+</html>
