@@ -11,12 +11,12 @@
 </head>
 
 <body>
-  <!-- <header style="display:none;"> -->
-  <header>
-    <h1>Shopemo</h1>
+  <header style="display:none;">
+  <!-- <header> -->
+    <h1 id="h1">Shopemo</h1>
   </header>
-  <!-- <main style="display: none;"> -->
-  <main>
+  <main style="display: none;">
+  <!-- <main> -->
     <div id="inputs">
       <div id="memos">
         <input type="text" id="input_1" placeholder="店名:クランク">
@@ -37,11 +37,11 @@
           </div>
           <textarea id="text_area" placeholder="お店情報"></textarea>
           <textarea id="text_area1" placeholder="tweetメモ:◯ ◯ ◯"></textarea>
-          <div id="tweet"></div>
+          <textarea id="url_area1" class="url" placeholder="url:01"></textarea>
+          <div id="tweet" class="tweet"></div>
           <ul>
             <li id="save">Save</li>
-            <li id="clear">✖️</li>
-            <li id="add_memo">+</li>
+            <li id="clear">clear</li>
           </ul>
         </div>
       </div>
@@ -70,13 +70,17 @@
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script>
-    // $('header').fadeIn(1000);
-    // $('main').fadeIn(1000);
-    // $('#input_1').on('click', function () {
-    //   $(this).next().slideToggle();
-    // });
+    $('header').fadeIn(1000);
+    $('main').fadeIn(1000);
+    $('#input_1').on('click', function () {
+      $(this).next().slideToggle();
+      $('#h1').css('font-color','black');
+    });
 
     $('#save').on('click', function () {
+      const url1 = $('#url_area1').val();
+      $('#tweet').html('<a href="' + url1 + '" id ="url_s" >' + url1 + '</a>');
+      localStorage.setItem('memo', url1);
 
       const data = {
         date: $('#input').val(),
@@ -84,16 +88,13 @@
         range: $('#input_2').val(),
         text: $('#text_area').val(),
         text1: $('#text_area1').val(),
-        tweet1: $('#tweet').val(),
+        url1: $('#url_area1').val(),
+        url_s1: $('#url_s').val(),
       }
       console.log('data');
       const jsonData = JSON.stringify(data);
       //ローカルストレージの'memo'に取得した内容を保存
       localStorage.setItem('memo', jsonData);
-
-      //const text = $('#text_area').val();
-      $('#tweet').html('<a href="' + text + '">' + text + '</a>');
-       localStorage.setItem('memo', text)
       alert('セーブされました');
     });
 
@@ -110,14 +111,15 @@
           $('#input_2').val(''),
           $('#text_area').val('');
         $('#text_area1').val('');
-        $('#tweet').val('');
+        $('#url_area1').val(),
+          $('#url_s').val('');
         alert('削除されました');
       }
-      else {
-        // キャンセルならアラートボックスを表示
-        alert("やめまーす。");
-      }
-      
+      // else {
+      //   // キャンセルならアラートボックスを表示
+      //   alert("やめまーす。");
+      // }
+
     });
 
 
@@ -131,7 +133,8 @@
       $('#input_2').val(data.range);
       $('#text_area').val(data.text);
       $('#text_area1').val(data.text1);
-      $('#tweet').val(data.tweet1);
+      $('#url_area1').val(data.url1),
+      $('#url_s').val(data.url_s1);
       //テキストエリアに'memo'を呼び出し上書きする
     }
 
