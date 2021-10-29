@@ -104,7 +104,7 @@
       $(this).next().slideToggle();
       $('#h1').css('font-color', 'black');
     });
-  
+
 
     $('#save').on('click', function () {
       const url1 = $('#url_area1').val();
@@ -118,7 +118,7 @@
         text: $('#text_area').val(),
         text1: $('#text_area1').val(),
         url1: $('#url_area1').val(),
-        url_s1: $('#url_s').val(),
+        url_s1: $('#tweet').val(),
       }
       console.log('data');
       const jsonData = JSON.stringify(data);
@@ -141,7 +141,7 @@
           $('#text_area').val('');
         $('#text_area1').val('');
         $('#url_area1').val(),
-          //$('#url_s').val('');
+          $('#tweet').val('');
         alert('削除されました');
       }
       // else {
@@ -163,7 +163,7 @@
       $('#text_area').val(data.text);
       $('#text_area1').val(data.text1);
       $('#url_area1').val(data.url1),
-        $('#url_s').val(data.url_s1);
+        $('#tweet').val(data.url_s1);
       //テキストエリアに'memo'を呼び出し上書きする
     }
 

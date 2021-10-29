@@ -58,6 +58,7 @@ li {
     width: 500px;
     text-align: center;
     margin-left: 3%;
+    border-radius: 50%;
 }
 
 li:hover {
@@ -107,15 +108,17 @@ i {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
 }
 
 .timers button {
     width: 70%;
     margin-left: 3%;
+    margin-top: 1%;
 }
 
 .timer {
-    margin-top: 0%;
+    margin: 0% 3%;
 }
 
 .url {
