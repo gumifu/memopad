@@ -12,11 +12,11 @@
 
 <body>
   <header style="display:none;">
-  <!-- <header> -->
+    <!-- <header> -->
     <h1 id="h1">Shopemo</h1>
   </header>
   <main style="display: none;">
-  <!-- <main> -->
+    <!-- <main> -->
     <div id="inputs">
       <div id="memos">
         <input type="text" id="input_1" placeholder="店名:クランク">
@@ -36,7 +36,7 @@
             <input type="range" id="input_2" min="0" max="100" step="10">
           </div>
           <textarea id="text_area" placeholder="お店情報"></textarea>
-          <textarea id="text_area1" placeholder="tweetメモ:◯ ◯ ◯"></textarea>
+          <textarea id="text_area1" placeholder="メモ:◯ ◯ ◯"></textarea>
           <textarea id="url_area1" class="url" placeholder="url:01"></textarea>
           <div id="tweet" class="tweet"></div>
           <ul>
@@ -45,6 +45,34 @@
           </ul>
         </div>
       </div>
+      <!-- <div id="memos">
+        <input type="text" id="input_1_2" placeholder="店名:クランク">
+        押すと縮小
+        <div>
+          <div class="timers">
+            <i id="time">0秒</i>
+            <input type="text" id="sec" class="timer" placeholder="目安：180秒">
+            <button id="start">開始</button>
+            <audio src="sound/Accent45-2.mp3" id="sound"></audio>
+          </div>
+          タイマー
+
+          <input type="date" id="input_0_2">
+          <div class="comp">
+            <i>評価</i>
+            <input type="range" id="input_2_2" min="0" max="100" step="10">
+          </div>
+          <textarea id="text_area_2" placeholder="お店情報"></textarea>
+          <textarea id="text_area1_2" placeholder="tweetメモ:◯ ◯ ◯"></textarea>
+          <textarea id="url_area1_2" class="url" placeholder="url:01"></textarea>
+          <div id="tweet" class="tweet"></div>
+          <ul>
+            <li id="save">Save</li>
+            <li id="clear">clear</li>
+          </ul>
+        </div>
+      </div> -->
+
     </div>
 
   </main>
@@ -74,8 +102,9 @@
     $('main').fadeIn(1000);
     $('#input_1').on('click', function () {
       $(this).next().slideToggle();
-      $('#h1').css('font-color','black');
+      $('#h1').css('font-color', 'black');
     });
+  
 
     $('#save').on('click', function () {
       const url1 = $('#url_area1').val();
@@ -112,7 +141,7 @@
           $('#text_area').val('');
         $('#text_area1').val('');
         $('#url_area1').val(),
-          $('#url_s').val('');
+          //$('#url_s').val('');
         alert('削除されました');
       }
       // else {
@@ -134,7 +163,7 @@
       $('#text_area').val(data.text);
       $('#text_area1').val(data.text1);
       $('#url_area1').val(data.url1),
-      $('#url_s').val(data.url_s1);
+        $('#url_s').val(data.url_s1);
       //テキストエリアに'memo'を呼び出し上書きする
     }
 

@@ -123,8 +123,16 @@ i {
     margin-bottom: 0%;
 }
 
-.tweet{
+.tweet {
     font-size: 18px;
     width: 70%;
     margin-left: 3%;
+}
+
+.grid-item {
+    width: 25%;
+}
+
+.grid-item--width2 {
+    width: 50%;
 }
